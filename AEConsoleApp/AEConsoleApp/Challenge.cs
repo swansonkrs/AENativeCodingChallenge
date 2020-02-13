@@ -84,6 +84,7 @@ namespace AEConsoleApp
             }
         }
 
+        #region Sum Evens
         public static int SumEvens(List<int> numbers)
         {
             var sum = 0;
@@ -95,7 +96,9 @@ namespace AEConsoleApp
 
             return sum;
         }
+        #endregion
 
+        #region GET
         public static string GETRequest(Uri url, bool logResponse = false, string serverName = "localhost")
         {
             var startTime = DateTime.Now.ToString();
@@ -116,7 +119,7 @@ namespace AEConsoleApp
                     if (((HttpWebResponse)response).StatusCode == HttpStatusCode.OK)
                         httpCode = 200;
 
-                    LogResponse(startTime, endTime, httpCode, response, responseText);
+                    LogResponse(startTime, endTime, httpCode, responseText);
                 }
 
                 return responseText;
@@ -132,7 +135,7 @@ namespace AEConsoleApp
                     else if (((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.InternalServerError)
                         httpCode = 500;
 
-                    LogResponse(startTime, endTime, httpCode, ex.Response, ex.Message);
+                    LogResponse(startTime, endTime, httpCode, ex.Message);
                 }
                 return ex.Message;
             }
@@ -144,7 +147,7 @@ namespace AEConsoleApp
             Console.WriteLine(response);
         }
 
-        public static void LogResponse(string startTime, string endTime, int httpCode, WebResponse response, string responseText, string serverName = "localhost")
+        public static void LogResponse(string startTime, string endTime, int httpCode, string responseText, string serverName = "localhost")
         {
             var errorCode = 0;
 
@@ -178,7 +181,9 @@ namespace AEConsoleApp
             command.Dispose();
             conn.Close();
         }
+        #endregion
 
+        #region Async Print
         public static async Task DelayedPrint(List<int> numbers)
         {
             var reported = new Dictionary<int, string>();
@@ -217,6 +222,7 @@ namespace AEConsoleApp
                     firstReported.Add(num, threadName);
             }
         }
+        #endregion
 
         public static List<int> CreateListFromDelimitedString(string delimitedString)
         {
